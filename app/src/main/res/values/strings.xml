@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">kurtsee</string>
+    <string name="Hello">一起，我们可以看见更大的世界</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="blind">盲人</string>
+    <string name="vter">志愿者</string>
+    <string name="settings">设置</string>
+    <string name="profile">用户详情</string>
+    <string name="logout">退出账号</string>
+    <string name="User_name_cannot_be_empty">用户名不能为空！</string>
+    <string name="Password_cannot_be_empty">密码不能为空！</string>
+    <string name="Confirm_password_cannot_be_empty">确认密码不能为空!</string>
+    <string name="Two_input_password">两次输入的密码不一致，请重新输入!</string>
+    <string name="username_illegal">用户名不合法</string>
+    <string name="password_illegal">密码为不合法</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="register_succeed">注册成功</string>
+    <string name="login_succeed">登陆成功</string>
+
+    <string name="volunteer_main_note">举手之劳，我们可以让他们的生活更好</string>
+
+    <string name="make_video_call">向志愿者发起视频求助电话</string>
+    <string name="answer">接听通话</string>
+    <string name="hang_up">结束视频通话</string>
+
+
+    <string name="can_not_connect_chat_server_connection">连接不到服务器</string>
+    <string name="call_version_inconsistent">通话协议版本不一致</string>
+    <string name="call_duration">通话时长</string>
+    <string name="Refused">已拒绝</string>
+    <string name="The_other_party_has_refused_to">对方已拒绝</string>
+    <string name="The_other_is_not_online">对方不在线</string>
+    <string name="The_other_is_on_the_phone">对方正在通话中</string>
+    <string name="The_other_party_did_not_answer">对方未接听</string>
+    <string name="did_not_answer">未接听</string>
+    <string name="Has_been_cancelled">已取消</string>
+    <string name="have_connected_with">已经和对方建立连接</string>
+    <string name="The_other_party_refused_to_accept">对方拒绝接受！</string>
+    <string name="Connection_failure">连接建立失败！</string>
+    <string name="The_other_party_is_not_online">对方不在线，请稍后再拨……</string>
+    <string name="The_other_is_on_the_phone_please">对方正在通话中，请稍后再拨</string>
+    <string name="The_other_is_hang_up">对方已经挂断</string>
+    <string name="The_other_party_did_not_answer_new">对方未接听</string>
+
+    <string name="new_call_notification_title_template">New call: %1$s</string>
+
+
+    <string name="title_activity_change_password">更改密码</string>
+    <string name="change_password">确认更改</string>
+    <string name="Password_cannot_be_the_same">新旧密码不能相同</string>
+    <string name="Password_changing_succeed">更改成功</string>
+
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="enter_username">请输入用户名</string>
+    <string name="enter_password">请输入密码</string>
+    <string name="enter_confirm_password">请再输入一遍，确认密码</string>
+    <string name="enter_old_password">请输入旧密码</string>
+    <string name="enter_new_password">请输入新密码</string>
+    <string name="local_surface">本地视频窗口</string>
+    <string name="opposite_surface">对方视频窗口</string>
+
+
+</resources>
