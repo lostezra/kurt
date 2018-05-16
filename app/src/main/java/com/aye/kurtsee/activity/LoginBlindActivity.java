@@ -1,4 +1,4 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.administrator.testvideochat.R;
+import com.aye.kurtsee.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 

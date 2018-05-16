@@ -1,14 +1,13 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.administrator.testvideochat.R;
+import com.aye.kurtsee.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,8 +19,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 

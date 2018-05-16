@@ -1,4 +1,4 @@
-package com.example.administrator.testvideochat.app;
+package com.aye.kurtsee.app;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -9,16 +9,14 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.example.administrator.testvideochat.activity.VideoChatActivity;
+import com.aye.kurtsee.activity.VideoChatActivity;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/12/6.
- */
+
 public class MApplication extends Application {
     @Override
     public void onCreate() {

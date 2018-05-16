@@ -1,4 +1,4 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
-import com.example.administrator.testvideochat.R;
+import com.aye.kurtsee.R;
 
 public class MainVolunteerActivity extends AppCompatActivity{
 

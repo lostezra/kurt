@@ -1,8 +1,7 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -10,17 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.administrator.testvideochat.R;
-import com.hyphenate.EMCallBack;
+import com.aye.kurtsee.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;

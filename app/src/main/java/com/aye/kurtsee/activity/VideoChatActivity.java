@@ -1,4 +1,4 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.testvideochat.R;
+import com.aye.kurtsee.R;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMNoActiveCallException;

@@ -1,4 +1,4 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.administrator.testvideochat.R;
+import com.aye.kurtsee.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 

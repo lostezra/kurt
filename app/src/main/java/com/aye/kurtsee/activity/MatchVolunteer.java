@@ -1,4 +1,4 @@
-package com.example.administrator.testvideochat.activity;
+package com.aye.kurtsee.activity;
 
 /**
  * Created by lpp on 2018/4/10.
