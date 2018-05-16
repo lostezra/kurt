@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.administrator.testvideochat">
+    package="com.aye.kurtsee">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,7 +25,7 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
-        android:name=".app.MApplication"
+        android:name="com.aye.kurtsee.app.MApplication"
         android:allowBackup="true"
         android:icon="@drawable/temp"
         android:label="@string/app_name"
@@ -58,7 +58,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.WelcomeActivity">
+        <activity android:name="com.aye.kurtsee.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,19 +66,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginVolunteerActivity"
+            android:name="com.aye.kurtsee.activity.LoginVolunteerActivity"
             android:label="@string/vter" />
         <activity
-            android:name=".activity.LoginBlindActivity"
+            android:name="com.aye.kurtsee.activity.LoginBlindActivity"
             android:label="@string/blind" />
-        <activity android:name=".activity.MainVolunteerActivity" />
-        <activity android:name=".activity.MainBlindActivity" />
+        <activity android:name="com.aye.kurtsee.activity.MainVolunteerActivity" />
+        <activity android:name="com.aye.kurtsee.activity.MainBlindActivity" />
         <activity
-            android:name=".activity.Settings"
+            android:name="com.aye.kurtsee.activity.Settings"
             android:label="@string/settings" />
-        <activity android:name=".activity.VideoChatActivity" />
+        <activity android:name="com.aye.kurtsee.activity.VideoChatActivity" />
         <activity
-            android:name=".activity.ChangePasswordActivity"
+            android:name="com.aye.kurtsee.activity.ChangePasswordActivity"
             android:label="@string/title_activity_change_password" />
     </application>
 
