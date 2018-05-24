@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.aye.kurtsee.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EasyUtils;
+import com.aye.kurtsee.utils.Helper;
 
 /*开屏页*/
 public class SplashActivity extends AppCompatActivity {
@@ -34,8 +35,8 @@ public class SplashActivity extends AppCompatActivity {
 
                 int user_type = mSharedPreferences.getInt("user_name", 0);
                 boolean autoLogin = mSharedPreferences.getBoolean("autoLogin", false);
-
-                if (isLoggedIn() && autoLogin ) {
+                Helper helper = new Helper();
+                if (helper.isLoggedIn() && autoLogin ) {
                     //自动登录，进入主界面
                     long start = System.currentTimeMillis();
                     long costTime = System.currentTimeMillis() - start;
@@ -73,14 +74,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * if ever logged in
-     *
-     * @return
-     */
-    public boolean isLoggedIn() {
-        return EMClient.getInstance().isLoggedInBefore();
-    }
+
 }
 
 

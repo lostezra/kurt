@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aye.kurtsee.R;
+import com.aye.kurtsee.utils.Helper;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -210,10 +211,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.e("用户类型register", Integer.toString(usertype));
                     try{
                         JSONObject json;
+                        Helper helper = new Helper();
                         if(usertype == 0){
-                            json = new JSONObject(getConnectionContent(URLSTRING1));
+                            json = new JSONObject(helper.getConnectionContent(URLSTRING1));
                         } else {
-                            json = new JSONObject(getConnectionContent(URLSTRING2));
+                            json = new JSONObject(helper.getConnectionContent(URLSTRING2));
                         }
 
                         String dataMap= json.getString("dataMap");
@@ -272,13 +274,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String URLSTRING4="http://106.14.196.127:8080/kanjian-server-maven/isVolunteer.action?name=" + et_username;
                 int usertype = mSharedPreferences.getInt("user_type",0);
                 Log.e("用户类型login", Integer.toString(usertype));
+
                 try{
                     JSONObject json;
-
+                    Helper helper = new Helper();
                     if(usertype == 0){
-                        json = new JSONObject(getConnectionContent(URLSTRING3));
+                        json = new JSONObject(helper.getConnectionContent(URLSTRING3));
                     } else {
-                        json = new JSONObject(getConnectionContent(URLSTRING4));
+                        json = new JSONObject(helper.getConnectionContent(URLSTRING4));
                     }
 
                     String dataMap= json.getString("dataMap");
@@ -329,50 +332,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private String getConnectionContent(String urlstring){
-        InputStream inputStream=null;
-        try{
-            URL url=new URL(urlstring);
-            mHttpURLConnection=(HttpURLConnection) url.openConnection();
-            mHttpURLConnection.setConnectTimeout(5*1000);
-            mHttpURLConnection.setReadTimeout(5*1000);
-            mHttpURLConnection.setRequestMethod("GET");
-            inputStream=mHttpURLConnection.getInputStream();
-            String response=convertStreamToString(inputStream);
-            return response;
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-            return "";
-        }catch (IOException e){
-            e.printStackTrace();
-            return "";
-        }finally {
-            if(inputStream!=null){
-                try {
-                    inputStream.close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-            if (mHttpURLConnection!=null){
-                mHttpURLConnection.disconnect();
-            }
-        }
-    }
 
-    private String convertStreamToString(InputStream is)throws IOException{
-        BufferedReader reader =new BufferedReader(new InputStreamReader(is));
-        StringBuffer sb=new StringBuffer();
-        String line;
-        while ((line=reader.readLine())!=null){
-            sb.append(line+"\n");
-        }
-        String respose=sb.toString();
-        if(reader!=null){
-            reader.close();
-        }
-        return respose;
-    }
+
+
 
     /*
      * 验证用户名

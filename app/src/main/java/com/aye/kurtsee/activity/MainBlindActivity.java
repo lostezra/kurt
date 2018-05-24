@@ -2,6 +2,7 @@ package com.aye.kurtsee.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,8 +12,13 @@ import android.view.View;
 import android.view.Window;
 
 import com.aye.kurtsee.R;
+import com.aye.kurtsee.utils.Helper;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +30,8 @@ import java.net.URL;
 
 public class MainBlindActivity extends AppCompatActivity{
 
-    private HttpURLConnection mHttpURLConnection;
+
+    private Message msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +74,15 @@ public class MainBlindActivity extends AppCompatActivity{
     /**
      * 视频通话
      */
-    //private static final String URLSTRING="http://106.14.196.127:8080/kanjian-server-maven/findVolunteer.action?language=1&region=0";
+    private static final String URLSTRING="http://106.14.196.127:8080/kanjian-server-maven/findVolunteer.action?language=1&region=0";
     private void videoChat() {
-        /*new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 MatchVolunteer mv=new MatchVolunteer();
+                Helper helper = new Helper();
                 try{
-                    JSONObject json=new JSONObject(getConnectionContent(URLSTRING));
+                    JSONObject json=new JSONObject(helper.getConnectionContent(URLSTRING));
                     String dataMap= json.getString("dataMap");
                     JSONObject dM=new JSONObject(dataMap);
                     mv.setSuccess(dM.getString("success"));
@@ -102,9 +110,12 @@ public class MainBlindActivity extends AppCompatActivity{
             printStr+=" ";
             printStr+=usernameArray[i];
         }
-        String userName = printStr;*/
+        String userName = printStr;
 
-        String userName = "v0";
+
+
+        //写死
+        //String userName = "v0";
 
         try {//单参数
             EMClient.getInstance().callManager().makeVideoCall(userName);
@@ -120,49 +131,7 @@ public class MainBlindActivity extends AppCompatActivity{
     }
 
 
-    private String getConnectionContent(String urlstring){
-        InputStream inputStream=null;
-        try{
-            URL url=new URL(urlstring);
-            mHttpURLConnection=(HttpURLConnection) url.openConnection();
-            mHttpURLConnection.setConnectTimeout(5*1000);
-            mHttpURLConnection.setReadTimeout(5*1000);
-            mHttpURLConnection.setRequestMethod("GET");
-            inputStream=mHttpURLConnection.getInputStream();
-            String response=convertStreamToString(inputStream);
-            return response;
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-            return "";
-        }catch (IOException e){
-            e.printStackTrace();
-            return "";
-        }finally {
-            if(inputStream!=null){
-                try {
-                    inputStream.close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-            if (mHttpURLConnection!=null){
-                mHttpURLConnection.disconnect();
-            }
-        }
-    }
 
-    private String convertStreamToString(InputStream is)throws IOException {
-        BufferedReader reader =new BufferedReader(new InputStreamReader(is));
-        StringBuffer sb=new StringBuffer();
-        String line;
-        while ((line=reader.readLine())!=null){
-            sb.append(line+"\n");
-        }
-        String respose=sb.toString();
-        if(reader!=null){
-            reader.close();
-        }
-        return respose;
-    }
+
 
 }
