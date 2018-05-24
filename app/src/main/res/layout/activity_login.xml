@@ -4,8 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:state_pressed="true" android:color="@color/com_facebook_blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
 
 
     <LinearLayout
@@ -102,6 +105,16 @@
                 android:id="@+id/cb_autoLogin"
 
                 android:checked="false"/>
+
+            <TextView
+                android:id="@+id/forgetpwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="忘记密码？"
+                android:gravity="end"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
 
 

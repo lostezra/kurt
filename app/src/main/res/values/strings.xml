@@ -18,6 +18,11 @@
     <string name="register_succeed">注册成功</string>
     <string name="login_succeed">登陆成功</string>
 
+    <string name="email">邮箱</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="forget_password_notes">请输入申请账号时的邮箱，我们会向这个邮箱发一封邮件来帮您重置密码。</string>
+    <string name="reset_password">重置密码</string>
+
     <string name="volunteer_main_note">举手之劳，我们可以让他们的生活更好</string>
 
     <string name="make_video_call">向志愿者发起视频求助电话</string>

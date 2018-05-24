@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aye.kurtsee.R;
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText et_username;
     private EditText et_password;
     private CheckBox cb_autoLogin;
+    private TextView tv_forgerpwd;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEdit;
     private HttpURLConnection mHttpURLConnection;
@@ -58,11 +60,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         mSharedPreferences = getSharedPreferences("kurtsee", MODE_PRIVATE);
-        // 得到全局的 SharedPreferences 的 edit 对象，因为后面要用很多，所以直接定义成全局变量
         mEdit = mSharedPreferences.edit();
 
         int i = mSharedPreferences.getInt("user_type", 0);
-
         Log.e("用户类型", Integer.toString(i));
 
         initView();
@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void setListener() {
         btn_login.setOnClickListener(this);
         btn_register.setOnClickListener(this);
+        tv_forgerpwd.setOnClickListener(this);
     }
 
     private void initView() {
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_username= (EditText) findViewById(R.id.et_username);
         et_password= (EditText) findViewById(R.id.et_password);
         cb_autoLogin = (CheckBox) findViewById(R.id.cb_autoLogin);
-
+        tv_forgerpwd = (TextView) findViewById(R.id.forgetpwd);
 
 
     }
@@ -95,7 +96,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_register:
                 register();
                 break;
-
+            case R.id.forgetpwd:
+                startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
+                break;
         }
     }
 
@@ -193,7 +196,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)){
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) && checkUsername() && checkPassword()){
             new Thread(new Runnable() {
                 @Override
                 public void run() {
