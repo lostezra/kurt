@@ -2,6 +2,7 @@ package com.aye.kurtsee.activity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,12 +14,17 @@ import com.hyphenate.chat.EMClient;
 
 public class Settings extends AppCompatActivity {
 
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEdit;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        mSharedPreferences = getSharedPreferences("kurtsee", MODE_PRIVATE);
+        mEdit = mSharedPreferences.edit();
 
         findViewById(R.id.change_password).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +37,10 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logout();
+
+                mEdit.putBoolean("autoLogin", false);
+                mEdit.commit();
+
                 startActivity(new Intent(Settings.this, WelcomeActivity.class));
             }
         });

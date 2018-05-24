@@ -35,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LoginBlindActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int REGIST_WHAT_FAILE = 1;
     private static final int REGIST_WHAT_SUCCESS = 0;
     private static final int LOGIN_WHAT_SUCCESS=2;
@@ -44,19 +44,27 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
     private Button btn_register;
     private EditText et_username;
     private EditText et_password;
-    private CheckBox checkBox;
-    private CheckBox checkBox2;
-    private boolean rememberPwd = false;
-    private boolean autoLogin = false;
+    private CheckBox cb_autoLogin;
     private SharedPreferences mSharedPreferences;
-
+    private SharedPreferences.Editor mEdit;
     private HttpURLConnection mHttpURLConnection;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mSharedPreferences = getSharedPreferences("kurtsee", MODE_PRIVATE);
+        // 得到全局的 SharedPreferences 的 edit 对象，因为后面要用很多，所以直接定义成全局变量
+        mEdit = mSharedPreferences.edit();
+
+        int i = mSharedPreferences.getInt("user_type", 0);
+
+        Log.e("用户类型", Integer.toString(i));
+
         initView();
         setListener();
     }
@@ -71,8 +79,9 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
         btn_register = (Button) findViewById(R.id.btn_register);
         et_username= (EditText) findViewById(R.id.et_username);
         et_password= (EditText) findViewById(R.id.et_password);
-        checkBox = (CheckBox) findViewById(R.id.checkBox);
-        checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
+        cb_autoLogin = (CheckBox) findViewById(R.id.cb_autoLogin);
+
+
 
     }
 
@@ -97,16 +106,24 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
             super.handleMessage(msg);
             switch (msg.what){
                 case REGIST_WHAT_SUCCESS:
-                    Toast.makeText(LoginBlindActivity.this,"注册成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,"注册成功", Toast.LENGTH_LONG).show();
                     break;
                 case REGIST_WHAT_FAILE:
                     String dis= (String) msg.obj;
-                    Toast.makeText(LoginBlindActivity.this, dis, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, dis, Toast.LENGTH_LONG).show();
                     break;
                 case LOGIN_WHAT_SUCCESS:
-                    Toast.makeText(LoginBlindActivity.this,"登录成功", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(LoginBlindActivity.this, MainBlindActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(LoginActivity.this,"登录成功", Toast.LENGTH_SHORT).show();
+
+                    int usertype = mSharedPreferences.getInt("user_type",0);
+                    Log.e("用户类型go", Integer.toString(usertype));
+                    Intent i;
+                    if(usertype == 0){
+                        i = new Intent(LoginActivity.this, MainBlindActivity.class);
+                    } else {
+                        i = new Intent(LoginActivity.this, MainVolunteerActivity.class);
+                    }
+                    startActivity(i);
                     finish();
                     break;
             }
@@ -119,7 +136,7 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
 
         if (TextUtils.isEmpty(username)) {
             //Toast.makeText(this, getResources().getString(R.string.User_name_cannot_be_empty), Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginBlindActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             builder.setTitle(R.string.username);
             builder.setMessage(R.string.User_name_cannot_be_empty);
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -133,8 +150,7 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
             et_username.requestFocus();
             return;
         } else if (!checkUsername()){
-            //Toast.makeText(this, getResources().getString(R.string.username_illegal), Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginBlindActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             builder.setTitle(R.string.username);
             builder.setMessage(R.string.username_illegal);
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -148,8 +164,7 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
             et_username.requestFocus();
             return;
         } else if (TextUtils.isEmpty(password)) {
-            //Toast.makeText(this, getResources().getString(R.string.Password_cannot_be_empty), Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginBlindActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             builder.setTitle(R.string.password);
             builder.setMessage(R.string.Password_cannot_be_empty);
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -163,8 +178,7 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
             et_password.requestFocus();
             return;
         } else if (!checkPassword()){
-            //Toast.makeText(this, getResources().getString(R.string.password_illegal), Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginBlindActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             builder.setTitle(R.string.password);
             builder.setMessage(R.string.password_illegal);
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -187,8 +201,18 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
                     Message m=new Message();
                     String isSuccess="";
                     String URLSTRING1="http://106.14.196.127:8080/kanjian-server-maven/addBlindUser.action?language=1&region=0&name=" + username +"&password=" + password +"&gender=0";
+                    String URLSTRING2="http://106.14.196.127:8080/kanjian-server-maven/addVolunteerUser.action?language=1&region=0&name=" + username +"&password=" + password +"&gender=0";
+
+                    int usertype = mSharedPreferences.getInt("user_type",0);
+                    Log.e("用户类型register", Integer.toString(usertype));
                     try{
-                        JSONObject json=new JSONObject(getConnectionContent(URLSTRING1));
+                        JSONObject json;
+                        if(usertype == 0){
+                            json = new JSONObject(getConnectionContent(URLSTRING1));
+                        } else {
+                            json = new JSONObject(getConnectionContent(URLSTRING2));
+                        }
+
                         String dataMap= json.getString("dataMap");
                         JSONObject dM=new JSONObject(dataMap);
                         isSuccess=dM.getString("success");
@@ -207,21 +231,6 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
                         mHandler.sendMessage(m);
                     }
 
-                    //注册失败会抛出HyphenateException
-                    /*try {
-                        EMClient.getInstance().createAccount(username, password);//同步方法
-                        Log.e("kurt", "注册成功");
-                        Message message=Message.obtain();
-                        message.what=REGIST_WHAT_SUCCESS;
-                        mHandler.sendMessage(message);
-                    } catch (HyphenateException e) {
-                        e.printStackTrace();
-                        Log.e("kurt", "注册失败" + ":" + e.getErrorCode() + "," + e.getDescription());
-                        Message message=Message.obtain();
-                        message.obj="注册失败" + ":" + e.getErrorCode() + "," + e.getDescription();
-                        message.what=REGIST_WHAT_FAILE;
-                        mHandler.sendMessage(message);
-                    }*/
                 }
             }).start();
         }
@@ -231,6 +240,20 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
     private void login() {
         String password=et_password.getText().toString().trim();
         String userName=et_username.getText().toString().trim();
+
+
+        if(cb_autoLogin.isChecked()){
+            mEdit.putString("username", userName);
+            mEdit.putString("password", password);
+            mEdit.putBoolean("autoLogin", true);
+            mEdit.commit();
+        } else {
+            mEdit.putBoolean("autoLogin", false);
+            mEdit.commit();
+        }
+
+
+
         //回调
         EMClient.getInstance().login(userName,password,new EMCallBack() {
             @Override
@@ -239,16 +262,26 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
 
                 String isSuccess="";
                 String password="";
-                //是否是 Blind
+                //是 Blind or volunteer
                 //用户登录等的验证
                 //成功返回密码
                 String URLSTRING3="http://106.14.196.127:8080/kanjian-server-maven/isBlind.action?name=" + et_username;
+                String URLSTRING4="http://106.14.196.127:8080/kanjian-server-maven/isVolunteer.action?name=" + et_username;
+                int usertype = mSharedPreferences.getInt("user_type",0);
+                Log.e("用户类型login", Integer.toString(usertype));
                 try{
-                    JSONObject json=new JSONObject(getConnectionContent(URLSTRING3));
+                    JSONObject json;
+
+                    if(usertype == 0){
+                        json = new JSONObject(getConnectionContent(URLSTRING3));
+                    } else {
+                        json = new JSONObject(getConnectionContent(URLSTRING4));
+                    }
+
                     String dataMap= json.getString("dataMap");
                     JSONObject dM=new JSONObject(dataMap);
-                    isSuccess=dataMap;
-                    isSuccess=dM.getString("isVolunteer");
+                    //isSuccess=dataMap;
+                    //isSuccess=dM.getString("isVolunteer");
                     if(isSuccess=="true"){
                         password=dM.getString("password");
                     }
@@ -260,6 +293,8 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
                 Message message=Message.obtain();
                 message.what=LOGIN_WHAT_SUCCESS;
                 mHandler.sendMessage(message);
+
+
             }
 
             @Override
@@ -273,8 +308,8 @@ public class LoginBlindActivity extends AppCompatActivity implements View.OnClic
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //Toast.makeText(LoginBlindActivity.this,"登录聊天服务器失败:"+message,Toast.LENGTH_LONG).show();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginBlindActivity.this);
+                        //Toast.makeText(LoginActivity.this,"登录聊天服务器失败:"+message,Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                         builder.setTitle("登录失败");
                         builder.setMessage(message);
                         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {

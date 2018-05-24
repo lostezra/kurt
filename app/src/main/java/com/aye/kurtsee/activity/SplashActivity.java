@@ -1,6 +1,7 @@
 package com.aye.kurtsee.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.hyphenate.util.EasyUtils;
 public class SplashActivity extends AppCompatActivity {
 
     private static final int sleepTime = 2000;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,8 +29,14 @@ public class SplashActivity extends AppCompatActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                if (isLoggedIn()) {
-                    // auto login mode, make sure all group and conversation is loaded before enter the main screen
+
+                mSharedPreferences = getSharedPreferences("kurtsee", MODE_PRIVATE);
+
+                int user_type = mSharedPreferences.getInt("user_name", 0);
+                boolean autoLogin = mSharedPreferences.getBoolean("autoLogin", false);
+
+                if (isLoggedIn() && autoLogin ) {
+                    //自动登录，进入主界面
                     long start = System.currentTimeMillis();
                     long costTime = System.currentTimeMillis() - start;
                     //wait
@@ -39,14 +47,14 @@ public class SplashActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
+
                     String topActivityName = EasyUtils.getTopActivityName(EMClient.getInstance().getContext());
                     if (topActivityName != null && topActivityName.equals(VideoChatActivity.class.getName())) {
                         // nop
                         // avoid main screen overlap Calling Activity
-                   /* } else if(type == 0){
-                        //是盲人
-                        //is blind, enter blind main screen
-                        startActivity(new Intent(SplashActivity.this, MainBlindActivity.class));*/
+                    } else if(user_type == 0){
+                        //盲人 type = 0, 志愿者 type = 1
+                        startActivity(new Intent(SplashActivity.this, MainBlindActivity.class));
                     } else{
                         startActivity(new Intent(SplashActivity.this, MainVolunteerActivity.class));
                     }

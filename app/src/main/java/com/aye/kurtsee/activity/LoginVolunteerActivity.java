@@ -36,8 +36,11 @@ public class LoginVolunteerActivity extends AppCompatActivity implements View.On
     private static final int REGIST_WHAT_SUCCESS = 0;
     private static final int LOGIN_WHAT_SUCCESS=2;
     private static final int LOGIN_WHAT_FAIL=3;
-    private Button btn_login, btn_register;
-    private EditText et_username, et_password;
+    private Button btn_login;
+    private Button btn_register;
+    private EditText et_username;
+    private EditText et_password;
+
     private HttpURLConnection mHttpURLConnection;
 
 
