@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText et_username;
     private EditText et_password;
     private CheckBox cb_autoLogin;
-    private TextView tv_forgerpwd;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEdit;
     private HttpURLConnection mHttpURLConnection;
@@ -73,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void setListener() {
         btn_login.setOnClickListener(this);
         btn_register.setOnClickListener(this);
-        tv_forgerpwd.setOnClickListener(this);
     }
 
     private void initView() {
@@ -82,7 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_username= (EditText) findViewById(R.id.et_username);
         et_password= (EditText) findViewById(R.id.et_password);
         cb_autoLogin = (CheckBox) findViewById(R.id.cb_autoLogin);
-        tv_forgerpwd = (TextView) findViewById(R.id.forgetpwd);
 
 
     }
@@ -96,9 +93,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_register:
                 register();
-                break;
-            case R.id.forgetpwd:
-                startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
                 break;
         }
     }

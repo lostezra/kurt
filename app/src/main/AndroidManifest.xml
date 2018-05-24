@@ -73,8 +73,6 @@
         <activity
             android:name="com.aye.kurtsee.activity.LoginActivity"
             android:label="@string/login" />
-        <activity android:name=".activity.ForgetPasswordActivity"
-            android:label="@string/reset_password"/>
         <activity android:name="com.aye.kurtsee.activity.MainVolunteerActivity" />
         <activity android:name="com.aye.kurtsee.activity.MainBlindActivity" />
         <activity
