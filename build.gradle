@@ -21,6 +21,7 @@ allprojects {
             name 'Google'
         }
         google()
+        maven {url'http://developer.huawei.com/repo/'}
     }
 }
 

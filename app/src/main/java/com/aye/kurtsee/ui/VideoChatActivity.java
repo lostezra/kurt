@@ -1,4 +1,4 @@
-package com.aye.kurtsee.activity;
+package com.aye.kurtsee.ui;
 
 import android.hardware.Camera;
 import android.os.Bundle;

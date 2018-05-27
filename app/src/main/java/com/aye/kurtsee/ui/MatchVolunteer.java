@@ -1,4 +1,4 @@
-package com.aye.kurtsee.activity;
+package com.aye.kurtsee.ui;
 
 /**
  * Created by lpp on 2018/4/10.

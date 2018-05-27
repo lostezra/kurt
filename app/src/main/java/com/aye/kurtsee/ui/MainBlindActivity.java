@@ -1,4 +1,4 @@
-package com.aye.kurtsee.activity;
+package com.aye.kurtsee.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,21 +12,13 @@ import android.view.View;
 import android.view.Window;
 
 import com.aye.kurtsee.R;
-import com.aye.kurtsee.utils.Helper;
+import com.aye.kurtsee.Helper;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class MainBlindActivity extends AppCompatActivity{
 
@@ -103,19 +95,23 @@ public class MainBlindActivity extends AppCompatActivity{
             }
         }).start();
 
+        //写死
+        //String userName = "v0";
+
+
+        //得到志愿者用户名数组
         MatchVolunteer mv=(MatchVolunteer) msg.obj;
         String printStr=mv.getSuccess();
         String []usernameArray=mv.getUsername();
+
+        //每隔10秒向下一位志愿者发送通话
+        
         for (int i=0;usernameArray[i]!=null;i++){
             printStr+=" ";
             printStr+=usernameArray[i];
         }
         String userName = printStr;
 
-
-
-        //写死
-        //String userName = "v0";
 
         try {//单参数
             EMClient.getInstance().callManager().makeVideoCall(userName);

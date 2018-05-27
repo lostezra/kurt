@@ -1,4 +1,4 @@
-package com.aye.kurtsee.app;
+package com.aye.kurtsee;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -9,7 +9,9 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.aye.kurtsee.activity.VideoChatActivity;
+import com.aye.kurtsee.receiver.CallReceiver;
+import com.aye.kurtsee.ui.VideoChatActivity;
+import com.huawei.android.hms.agent.HMSAgent;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
@@ -17,11 +19,12 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class MApplication extends Application {
+public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
 
+        HMSAgent.init(this);
         initChat();
         setReceiver();//监听来电广播
 
@@ -36,23 +39,6 @@ public class MApplication extends Application {
 
     }
 
-    private class CallReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // 拨打方username
-            String from = intent.getStringExtra("from");
-            // call type
-            String type = intent.getStringExtra("type");
-            //跳转到通话页面
-            Log.e("kurt", "收到来电````````：from=" + from + "type=" + type);
-            Intent intentCall=new Intent(context, VideoChatActivity.class);
-            intentCall.putExtra("openType","1");//收到视频来电
-            intentCall.putExtra("from",from);
-            intentCall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intentCall);
-        }
-    }
 
     public void initChat(){
         EMOptions options = new EMOptions();

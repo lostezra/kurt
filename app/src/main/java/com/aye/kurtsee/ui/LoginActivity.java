@@ -1,4 +1,4 @@
-package com.aye.kurtsee.activity;
+package com.aye.kurtsee.ui;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -15,24 +15,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aye.kurtsee.R;
-import com.aye.kurtsee.utils.Helper;
+import com.aye.kurtsee.Helper;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox cb_autoLogin;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEdit;
-    private HttpURLConnection mHttpURLConnection;
+
 
 
 

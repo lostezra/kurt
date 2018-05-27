@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:23.+'
     implementation files('libs/hyphenatechat_3.3.7.jar')
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.huawei.android.hms:push:2.6.0.301'
 }
