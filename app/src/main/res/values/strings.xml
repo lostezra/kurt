@@ -66,6 +66,8 @@
     <string name="local_surface">本地视频窗口</string>
     <string name="opposite_surface">对方视频窗口</string>
 
+    <string name="search">搜索</string>
+
     <string name="auto_login">自动登录</string>
     <string name="remember_password">记住密码</string>
 

@@ -26,17 +26,28 @@
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"/>
 
-            <TextView
-                android:textSize="18.0sp"
-                android:textColor="@color/colorDarkText"
-                android:id="@+id/change_region"
-                android:text="国家/地区"
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textSize="18.0sp"
+                    android:textColor="@color/colorDarkText"
+                    android:id="@+id/change_region"
+                    android:text="国家/地区"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+
+                <include layout="@layout/item_country"/>
+
+            </LinearLayout>
+
 
             <TextView
                 android:textSize="18.0sp"
@@ -68,7 +79,7 @@
                 android:textSize="18.0sp"
                 android:textColor="@color/colorDarkText"
                 android:id="@+id/primary_language"
-                android:text="主要语言"
+                android:text="语言"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_sm"
@@ -76,7 +87,7 @@
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin" />
 
-            <TextView
+          <!--  <TextView
                 android:textSize="11.0sp"
                 android:textColor="@color/colorGray"
                 android:gravity="start"
@@ -87,9 +98,9 @@
                 android:layout_marginTop="@dimen/spacing_xs"
                 android:layout_marginBottom="@dimen/spacing_md"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />-->
 
-            <TextView
+           <!-- <TextView
                 android:textSize="18sp"
                 android:textColor="@color/colorDarkText"
                 android:id="@+id/secondary_language"
@@ -112,7 +123,7 @@
                 android:layout_marginTop="@dimen/spacing_xs"
                 android:layout_marginBottom="@dimen/spacing_md"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />-->
 
 
             <Button

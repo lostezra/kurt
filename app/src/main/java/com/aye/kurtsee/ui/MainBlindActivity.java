@@ -105,7 +105,7 @@ public class MainBlindActivity extends AppCompatActivity{
         String []usernameArray=mv.getUsername();
 
         //每隔10秒向下一位志愿者发送通话
-        
+
         for (int i=0;usernameArray[i]!=null;i++){
             printStr+=" ";
             printStr+=usernameArray[i];

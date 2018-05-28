@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.aye.kurtsee.Country;
+import com.aye.kurtsee.CountryPicker;
+import com.aye.kurtsee.OnPick;
 import com.aye.kurtsee.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
@@ -16,6 +21,11 @@ public class Settings extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEdit;
+
+    private ImageView ivFlag;
+    private TextView tvName;
+    private TextView tvCode;
+
 
 
     @Override
@@ -26,6 +36,24 @@ public class Settings extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences("kurtsee", MODE_PRIVATE);
         mEdit = mSharedPreferences.edit();
 
+        ivFlag = (ImageView) findViewById(R.id.iv_flag);
+        tvName = (TextView) findViewById(R.id.tv_name);
+        tvCode = (TextView) findViewById(R.id.tv_code);
+
+
+        findViewById(R.id.change_region).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CountryPicker.newInstance(null, new OnPick() {
+                    @Override
+                    public void onPick(Country country) {
+                        if(country.flag != 0) ivFlag.setImageResource(country.flag);
+                        tvName.setText(country.name);
+                        tvCode.setText("+" + country.code);
+                    }
+                }).show(getSupportFragmentManager(), "country");
+            }
+        });
         findViewById(R.id.change_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +77,14 @@ public class Settings extends AppCompatActivity {
 
     }
 
+
+
+
+    @Override
+    protected void onDestroy() {
+        Country.destroy();
+        super.onDestroy();
+    }
 
     private void logout() {
         EMClient.getInstance().logout(true, new EMCallBack() {
