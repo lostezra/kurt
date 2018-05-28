@@ -1,4 +1,4 @@
-package com.aye.kurtsee;
+package com.aye.kurtsee.utilis;
 
 import com.hyphenate.chat.EMClient;
 
