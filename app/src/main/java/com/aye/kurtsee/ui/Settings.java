@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.aye.kurtsee.Country;
-import com.aye.kurtsee.CountryPicker;
-import com.aye.kurtsee.OnPick;
+import com.aye.kurtsee.utilis.Country;
+import com.aye.kurtsee.utilis.CountryPicker;
+import com.aye.kurtsee.utilis.OnPick;
 import com.aye.kurtsee.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;

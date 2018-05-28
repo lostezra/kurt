@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.aye.kurtsee.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EasyUtils;
-import com.aye.kurtsee.Helper;
+import com.aye.kurtsee.utilis.Helper;
 
 /*开屏页*/
 public class SplashActivity extends AppCompatActivity {

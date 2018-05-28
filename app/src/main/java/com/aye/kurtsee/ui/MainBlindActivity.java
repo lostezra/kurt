@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.aye.kurtsee.R;
-import com.aye.kurtsee.Helper;
+import com.aye.kurtsee.utilis.Helper;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
 

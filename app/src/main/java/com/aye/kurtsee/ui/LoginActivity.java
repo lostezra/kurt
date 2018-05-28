@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.aye.kurtsee.R;
-import com.aye.kurtsee.Helper;
+import com.aye.kurtsee.utilis.Helper;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
