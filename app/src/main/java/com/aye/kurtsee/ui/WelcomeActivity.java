@@ -50,30 +50,6 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        logout();
     }
 
-    private void logout() {
-        EMClient.getInstance().logout(true, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                // TODO Auto-generated method stub
-                Log.e("kurt", "退出成功");
-
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-                // TODO Auto-generated method stub
-                Log.e("kurt", "退出失败：" + code + "," + message);
-            }
-        });
-    }
 }

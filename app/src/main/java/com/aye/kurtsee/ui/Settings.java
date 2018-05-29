@@ -69,7 +69,8 @@ public class Settings extends AppCompatActivity {
                 mEdit.putBoolean("autoLogin", false);
                 mEdit.commit();
 
-                startActivity(new Intent(Settings.this, WelcomeActivity.class));
+                Intent i = new Intent(Settings.this, WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
             }
         });
 
@@ -108,6 +109,7 @@ public class Settings extends AppCompatActivity {
                 Log.e("kurt", "退出失败：" + code + "," + message);
             }
         });
+
 
     }
 

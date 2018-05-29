@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEdit;
 
+    private Helper helper = new Helper();
 
 
 
@@ -109,9 +110,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.e("用户类型go", Integer.toString(usertype));
                     Intent i;
                     if(usertype == 0){
-                        i = new Intent(LoginActivity.this, MainBlindActivity.class);
+                        i = new Intent(LoginActivity.this, MainBlindActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     } else {
-                        i = new Intent(LoginActivity.this, MainVolunteerActivity.class);
+                        i = new Intent(LoginActivity.this, MainVolunteerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     }
                     startActivity(i);
                     finish();
@@ -193,12 +194,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String URLSTRING1="http://106.14.196.127:8080/kanjian-server-maven/addBlindUser.action?language=1&region=0&name=" + username +"&password=" + password +"&gender=0";
                     String URLSTRING2="http://106.14.196.127:8080/kanjian-server-maven/addVolunteerUser.action?language=1&region=0&name=" + username +"&password=" + password +"&gender=0";
 
-                    int usertype = mSharedPreferences.getInt("user_type",0);
-                    Log.e("用户类型register", Integer.toString(usertype));
+                    int userType = mSharedPreferences.getInt("user_type",0);
+                    Log.e("用户类型register", Integer.toString(userType));
                     try{
                         JSONObject json;
-                        Helper helper = new Helper();
-                        if(usertype == 0){
+
+                        if(userType == 0){
                             json = new JSONObject(helper.getConnectionContent(URLSTRING1));
                         } else {
                             json = new JSONObject(helper.getConnectionContent(URLSTRING2));
@@ -236,10 +237,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(cb_autoLogin.isChecked()){
             mEdit.putString("username", userName);
             mEdit.putString("password", password);
-            mEdit.putBoolean("autoLogin", true);
+            mEdit.putBoolean("auto_login", true);
             mEdit.commit();
         } else {
-            mEdit.putBoolean("autoLogin", false);
+            mEdit.putString("username", userName);
+            mEdit.putBoolean("auto_login", false);
             mEdit.commit();
         }
 
@@ -253,18 +255,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 String isSuccess="";
                 String password="";
-                //是 Blind or volunteer
-                //用户登录等的验证
+                //是 Blind or volunteer的验证
+                //用户登录等
                 //成功返回密码
                 String URLSTRING3="http://106.14.196.127:8080/kanjian-server-maven/isBlind.action?name=" + et_username;
                 String URLSTRING4="http://106.14.196.127:8080/kanjian-server-maven/isVolunteer.action?name=" + et_username;
-                int usertype = mSharedPreferences.getInt("user_type",0);
-                Log.e("用户类型login", Integer.toString(usertype));
+                int userType = mSharedPreferences.getInt("user_type",0);
+                Log.e("用户类型login", Integer.toString(userType));
 
                 try{
                     JSONObject json;
                     Helper helper = new Helper();
-                    if(usertype == 0){
+                    if(userType == 0){
                         json = new JSONObject(helper.getConnectionContent(URLSTRING3));
                     } else {
                         json = new JSONObject(helper.getConnectionContent(URLSTRING4));
@@ -274,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     JSONObject dM=new JSONObject(dataMap);
                     //isSuccess=dataMap;
                     //isSuccess=dM.getString("isVolunteer");
-                    if(isSuccess=="true"){
+                    if(isSuccess.equals("true")){
                         password=dM.getString("password");
                     }
 

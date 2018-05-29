@@ -141,6 +141,7 @@
         <!-- 接入HMSSDK PUSH模块需要注册，第三方相关 :接收Push消息（注册、Push消息、Push连接状态）广播，
                 此receiver类需要开发者自己创建并继承com.huawei.hms.support.api.push.PushReceiver类，
                 参考示例代码中的类：com.huawei.hmsagent.HuaweiPushRevicer-->
+       <!--华为推送广播接收器，可以直接使用环信 sdk 封装好的-->
         <receiver android:name=".receiver.CallReceiver" >
             <intent-filter>
                 <!-- 必须,用于接收token | Must， for receiving token -->

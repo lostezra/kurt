@@ -62,6 +62,10 @@ public class MainBlindActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     /**
      * 视频通话
@@ -71,6 +75,7 @@ public class MainBlindActivity extends AppCompatActivity{
         new Thread(new Runnable() {
             @Override
             public void run() {
+                //得到志愿者用户名数组
                 MatchVolunteer mv=new MatchVolunteer();
                 Helper helper = new Helper();
                 try{
@@ -92,37 +97,47 @@ public class MainBlindActivity extends AppCompatActivity{
                     e.printStackTrace();
                 }
 
+
+                String printStr=mv.getSuccess();
+                String []usernameArray=mv.getUsername();
+
+                //调试用
+                //打印所有符合的志愿者
+                for (int i=0;usernameArray[i]!=null;i++){
+                    printStr+=" ";
+                    printStr+=usernameArray[i];
+                }
+                String alluser = printStr;
+                Log.e("kurt", "所有 "+alluser);
+
+                //跳转视频聊天界面
+                Intent intent=new Intent(MainBlindActivity.this, VideoChatActivity.class);
+                startActivity(intent);
+
+                //每隔10秒向下一位志愿者发送通话
+                try{
+                    for (int i = 0;i <= usernameArray.length;i++){
+                        printStr = usernameArray[i];
+                        String userName = printStr;
+
+                        //拨打志愿者
+                        EMClient.getInstance().callManager().makeVideoCall(userName);
+                        Log.e("kurt", "拨打志愿者："+userName);
+
+                        //等待10s
+                        Thread.sleep(2*1000);
+                    }
+                }catch (EMServiceNotReadyException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    Log.e("kurt","视频拨打失败："+e.toString());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
         }).start();
 
-        //写死
-        //String userName = "v0";
-
-
-        //得到志愿者用户名数组
-        MatchVolunteer mv=(MatchVolunteer) msg.obj;
-        String printStr=mv.getSuccess();
-        String []usernameArray=mv.getUsername();
-
-        //每隔10秒向下一位志愿者发送通话
-
-        for (int i=0;usernameArray[i]!=null;i++){
-            printStr+=" ";
-            printStr+=usernameArray[i];
-        }
-        String userName = printStr;
-
-
-        try {//单参数
-            EMClient.getInstance().callManager().makeVideoCall(userName);
-            //跳转视频聊天界面
-            Intent intent=new Intent(MainBlindActivity.this, VideoChatActivity.class);
-            startActivity(intent);
-        } catch (EMServiceNotReadyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            Log.e("kurt","视频拨打失败："+e.toString());
-        }
 
     }
 

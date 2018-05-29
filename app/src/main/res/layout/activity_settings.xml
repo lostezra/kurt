@@ -1,143 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:layout_width="fill_parent"
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="vertical"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_md">
+
+        <TextView
+            android:textSize="18.0sp"
+            android:textColor="@color/colorDarkText"
+            android:id="@+id/profile"
+            android:text="个人资料"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_md" />
+
+        <TextView
+            android:textSize="18.0sp"
+            android:textColor="@color/colorDarkText"
+            android:id="@+id/change_password"
+            android:text="更改密码"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_md"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:textSize="18.0sp"
                 android:textColor="@color/colorDarkText"
-                android:id="@+id/profile"
-                android:text="个人资料"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xl"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"/>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:textSize="18.0sp"
-                    android:textColor="@color/colorDarkText"
-                    android:id="@+id/change_region"
-                    android:text="国家/地区"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_sm"
-                    android:layout_marginBottom="@dimen/spacing_md"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"/>
-
-
-                <include layout="@layout/item_country"/>
-
-            </LinearLayout>
-
-
-            <TextView
-                android:textSize="18.0sp"
-                android:textColor="@color/colorDarkText"
-                android:id="@+id/change_gender"
-                android:text="性别"
-                android:layout_width="fill_parent"
+                android:id="@+id/change_region"
+                android:text="国家/地区"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"/>
-
-            <TextView
-                android:textSize="18.0sp"
-                android:textColor="@color/colorDarkText"
-                android:id="@+id/change_password"
-                android:text="更改密码"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+                android:layout_marginBottom="@dimen/spacing_md"/>
 
 
+            <include layout="@layout/item_country"/>
 
-            <TextView
-                android:textSize="18.0sp"
-                android:textColor="@color/colorDarkText"
-                android:id="@+id/primary_language"
-                android:text="语言"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin" />
-
-          <!--  <TextView
-                android:textSize="11.0sp"
-                android:textColor="@color/colorGray"
-                android:gravity="start"
-                android:id="@+id/primary_language_note"
-                android:text="第一语言"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xs"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin" />-->
-
-           <!-- <TextView
-                android:textSize="18sp"
-                android:textColor="@color/colorDarkText"
-                android:id="@+id/secondary_language"
-                android:text="第二语言"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin" />
-
-            <TextView
-                android:textSize="11.0sp"
-                android:textColor="@color/colorGray"
-                android:gravity="start"
-                android:id="@+id/secondary_language_note"
-                android:text="其他语言"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xs"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin" />-->
-
-
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@color/colorRed"
-                android:text="退出登录"
-                android:textColor="@color/colorWhite" />
         </LinearLayout>
-    </ScrollView>
 
-</FrameLayout>
+
+        <TextView
+            android:textSize="18.0sp"
+            android:textColor="@color/colorDarkText"
+            android:id="@+id/change_gender"
+            android:text="性别"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_md"/>
+
+
+
+
+
+        <TextView
+            android:textSize="18.0sp"
+            android:textColor="@color/colorDarkText"
+            android:id="@+id/primary_language"
+            android:text="语言"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_md" />
+
+      <!--  <TextView
+            android:textSize="11.0sp"
+            android:textColor="@color/colorGray"
+            android:gravity="start"
+            android:id="@+id/primary_language_note"
+            android:text="第一语言"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin" />-->
+
+       <!-- <TextView
+            android:textSize="18sp"
+            android:textColor="@color/colorDarkText"
+            android:id="@+id/secondary_language"
+            android:text="第二语言"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin" />
+
+        <TextView
+            android:textSize="11.0sp"
+            android:textColor="@color/colorGray"
+            android:gravity="start"
+            android:id="@+id/secondary_language_note"
+            android:text="其他语言"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin" />-->
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin"
+            android:background="@color/colorRed"
+            android:text="退出登录"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="bottom"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,11 @@
 package com.aye.kurtsee.utilis;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+
+import com.aye.kurtsee.R;
 import com.hyphenate.chat.EMClient;
 
 import java.io.BufferedReader;
@@ -23,6 +29,7 @@ public class Helper {
 
 
     private HttpURLConnection mHttpURLConnection;
+
     public String getConnectionContent(String urlstring){
         InputStream inputStream=null;
         try{
@@ -31,7 +38,10 @@ public class Helper {
             mHttpURLConnection.setConnectTimeout(5*1000);
             mHttpURLConnection.setReadTimeout(5*1000);
             mHttpURLConnection.setRequestMethod("GET");
+            // 调用 HttpURLConnection 连接对象的 getInputStream() 函数,
+            // 将内存缓冲区中封装好的完整的 HTTP 请求电文发送到服务端。
             inputStream=mHttpURLConnection.getInputStream();
+            Log.e("http", String.valueOf(inputStream));
             String response= convertStreamToString(inputStream);
             return response;
         }catch (MalformedURLException e){
@@ -65,5 +75,22 @@ public class Helper {
             reader.close();
         }
         return respose;
+    }
+
+
+    public void popAlertDialog(Context context, int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return;
+
     }
 }
